@@ -1,11 +1,11 @@
 #bash
 
-#запускаем наш образ
+#Р·Р°РїСѓСЃРєР°РµРј РЅР°С€ РѕР±СЂР°Р·
 
           vagrant up
 
 
-#заходим на vm
+#Р·Р°С…РѕРґРёРј РЅР° vm
 
           vagrant ssh
 
@@ -14,7 +14,7 @@
 
 
 
-#далее заходим в директорию /var/log/nginx/ и создаем там 3 скрипта 0pochta.sh pochta.sh skripts.sh
+#РґР°Р»РµРµ Р·Р°С…РѕРґРёРј РІ РґРёСЂРµРєС‚РѕСЂРёСЋ /var/log/nginx/ Рё СЃРѕР·РґР°РµРј С‚Р°Рј 3 СЃРєСЂРёРїС‚Р° 0pochta.sh pochta.sh skripts.sh
 
           cd /var/log/nginx/
 
@@ -60,23 +60,23 @@
 
 
           #!/bin/bash
-          echo "Временной диапазон":
+          echo "Р’СЂРµРјРµРЅРЅРѕР№ РґРёР°РїР°Р·РѕРЅ":
           cat /var/log/nginx/access.log | awk '{print $4}' | head -n 1 &&  date | awk '{print $2,$3,$4,$6}' &&
 
           #1
-          echo "Топ-10 клиентских URL запрашиваемых с этого сервера"
+          echo "РўРѕРї-10 РєР»РёРµРЅС‚СЃРєРёС… URL Р·Р°РїСЂР°С€РёРІР°РµРјС‹С… СЃ СЌС‚РѕРіРѕ СЃРµСЂРІРµСЂР°"
           cat /var/log/nginx/access.log | awk '{print $7}' | sort | uniq -c | sort -rn | head -n 10 > 1.1.txt && cat 1.1.txt &&
           echo "------------------------------------------------------" 
           #2
-          echo "Топ-10 клиентских IP"
+          echo "РўРѕРї-10 РєР»РёРµРЅС‚СЃРєРёС… IP"
           cat /var/log/nginx/access.log | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 10 > 2.2.txt && tail -n 10 2.2.txt &&
           echo "------------------------------------------------------"
           #3
-          echo "Все коды состояния HTTP и их количество"
+          echo "Р’СЃРµ РєРѕРґС‹ СЃРѕСЃС‚РѕСЏРЅРёСЏ HTTP Рё РёС… РєРѕР»РёС‡РµСЃС‚РІРѕ"
           cat /var/log/nginx/access.log | awk '{print $9}'| grep -v "-" | sort | uniq -c | sort -rn > 3.3.txt && cat 3.3.txt && 
           echo "------------------------------------------------------" 
           #4
-          echo "Все коды состояния  4xx и 5xx"
+          echo "Р’СЃРµ РєРѕРґС‹ СЃРѕСЃС‚РѕСЏРЅРёСЏ  4xx Рё 5xx"
           cat /var/log/nginx/access.log | awk '{print $9}' | grep ^4 > 4.4.txt && cat /var/log/nginx/access.log | awk '{print $9}'  | grep ^5 >> 4.4.txt && cat 4.4.txt | uniq -d -c | sort -rn > 4.5.txt && cat 4.5.txt &&
           echo "------------------------------------------------------"
           echo "all"
@@ -84,7 +84,7 @@
 
 
 
-#делаем скрипты исполняемыми 
+#РґРµР»Р°РµРј СЃРєСЂРёРїС‚С‹ РёСЃРїРѕР»РЅСЏРµРјС‹РјРё 
 
           chmod +x /var/log/nginx/0pochta.sh
 
@@ -93,7 +93,7 @@
           chmod +x /var/log/nginx/skripts.sh
 
 
-#даем выполнения каждые пять минут 0pochta.sh каждый час pochta.sh
+#РґР°РµРј РІС‹РїРѕР»РЅРµРЅРёСЏ РєР°Р¶РґС‹Рµ РїСЏС‚СЊ РјРёРЅСѓС‚ 0pochta.sh РєР°Р¶РґС‹Р№ С‡Р°СЃ pochta.sh
 
           crontab -e
 
@@ -101,9 +101,14 @@
 
           0 * * * * /var/log/nginx/pochta.sh
 
-#проверка почты
+#РїСЂРѕРІРµСЂРєР° РїРѕС‡С‚С‹
 
           nano /var/spool/mail/root
+
+
+
+
+
 
 
 
